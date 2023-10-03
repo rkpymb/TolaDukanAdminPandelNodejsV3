@@ -7,7 +7,7 @@ export default function handler(req, res) {
         };
 
         axios.post(`${process.env.API_URL}admin/CheckAccount`, { token: process.env.MYKEY }, { headers }).then((response) => {
-            console.log(response.data.MYTSData)
+          
             res.status(200).json({ ReqData: response.data});
         });
 
