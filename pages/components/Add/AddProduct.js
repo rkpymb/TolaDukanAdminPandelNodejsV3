@@ -45,11 +45,14 @@ export default function ScrollDialog() {
     const [scroll, setScroll] = useState('paper');
     const [Title, setTitle] = useState('');
     const [Details, setDetails] = useState('');
-    const [Stock, setStock] = useState(1);
+    const [Stock, setStock] = useState(100);
     const [IsActive, setIsActive] = useState(false);
     const [Date, setDate] = useState('');
+    const [Unittext, setUnittext] = useState('');
+    const [Unit, setUnit] = useState(0);
     const [Time, setTime] = useState('');
     const [Category, setCategory] = useState('');
+    const [SubCategory, setSubCategory] = useState('');
     const [Sprice, setSprice] = useState('');
     const [Mprice, setMprice] = useState('');
     const [Duration, setDuration] = useState('');
@@ -57,6 +60,7 @@ export default function ScrollDialog() {
     const [Taglinetwo, setTaglinetwo] = useState('');
     const [IsFree, setIsFree] = useState('');
     const [CatListdata, setCatListdata] = useState([]);
+    const [SubCatListdata, setSubCatListdata] = useState([]);
     const handleClickOpen = (scrollType) => () => {
         setOpen(true);
         setScroll(scrollType);
@@ -79,7 +83,7 @@ export default function ScrollDialog() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let FinalFileName = document.querySelector('#FinalFileName').value
-        if (Title !== '' && FinalFileName !== '' && Category !== '' && Sprice !== '' && Mprice !== '' && Duration !== '' && Tagline !== '' && Taglinetwo !== '' && IsFree !== '') {
+        if (Title !== '' && FinalFileName !== '' && Category !== '' && Sprice !== '' && Mprice !== '' && Tagline !== '' && SubCategory !== '' && Unit !== 0 && Unittext !== '') {
             AddTs(FinalFileName)
             setBtnloading(true)
 
@@ -89,20 +93,19 @@ export default function ScrollDialog() {
 
 
     };
-    const handleChangeFree = (event) => {
-        setIsFree(event.target.value);
-    };
+ 
     const handleChangeCategory = (event) => {
         setCategory(event.target.value);
+    };
+    const handleChangeSubCategory = (event) => {
+        setSubCategory(event.target.value);
     };
 
 
     const AddTs = async (e) => {
         const Pid = Title.replace(/\s/g, '-');
-
-
-        const sendUM = { pid: Pid, catid: Category, title: Title, details: Details, img: e, mprice: Mprice, sprice: Sprice, isActive: IsActive, date: Date, time: Time, stock: Stock, duration: Duration, tagline: Tagline, taglinetwo: Taglinetwo, isFree: IsFree, JwtToken: Contextdata.JwtToken }
-        const data = await fetch("/api/V3/Add/AddTS", {
+        const sendUM = { pid: Pid, catid: Category, Subcatid: SubCategory, title: Title, details: Details, img: e, mprice: Mprice, sprice: Sprice, isActive: IsActive, stock: Stock, tagline: Tagline, Unit: Unit, Unittext: Unittext, JwtToken: Contextdata.JwtToken }
+        const data = await fetch("/api/V3/Add/AddProduct", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
@@ -116,7 +119,7 @@ export default function ScrollDialog() {
                 if (parsed.senddta) {
                     setOpen(false)
                     setBtnloading(false)
-                    router.push('/Academics/TestSeries')
+                    router.push('/ecommerce/Products')
                 }
 
             })
@@ -136,8 +139,25 @@ export default function ScrollDialog() {
                 return a.json();
             })
                 .then((parsed) => {
-                    console.log(parsed.ReqD.categories)
+                    Subcatlist()
                     setCatListdata(parsed.ReqD.categories)
+                   
+                })
+        }
+        const Subcatlist = async () => {
+            const dataid = '08c5th4rh86ht57h6g';
+            const sendUM = { dataid }
+            const data = await fetch("/api/V3/List/SubCategoriesList", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(sendUM)
+            }).then((a) => {
+                return a.json();
+            })
+                .then((parsed) => {
+                    setSubCatListdata(parsed.ReqD.categories)
                    
                 })
         }
@@ -154,7 +174,7 @@ export default function ScrollDialog() {
                 variant="outlined"
                 startIcon={<AddTwoToneIcon fontSize="small" />}
             >
-                Add new Test Series
+                Add new Product
             </Button>
             <Dialog
                 open={open}
@@ -163,7 +183,7 @@ export default function ScrollDialog() {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Add new Test Series</DialogTitle>
+                <DialogTitle id="scroll-dialog-title">Add new Product</DialogTitle>
                 <DialogContent dividers={scroll === 'paper'}>
 
                     <div className={MYS.featuresimagebox}>
@@ -211,7 +231,7 @@ export default function ScrollDialog() {
                        
                         <div className={MYS.inputlogin}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Main Category</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -220,6 +240,29 @@ export default function ScrollDialog() {
                                     onChange={handleChangeCategory}
                                 >
                                     {CatListdata.map((item) => {
+                                        return <MenuItem value={item.slug}>{item.name}</MenuItem>
+
+
+                                    }
+
+                                    )}
+                                    
+                                   
+
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className={MYS.inputlogin}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Sub Category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={SubCategory}
+                                    label="Select Category"
+                                    onChange={handleChangeSubCategory}
+                                >
+                                    {SubCatListdata.map((item) => {
                                         return <MenuItem value={item.slug}>{item.name}</MenuItem>
 
 
@@ -260,12 +303,34 @@ export default function ScrollDialog() {
                         <div className={MYS.inputlogin}>
                             <TextField
                                 required
-                                label="Validity in days"
+                                label="stock"
                                 fullWidth
                                 type='number'
-                                value={Duration}
+                                value={Stock}
 
-                                onInput={e => setDuration(e.target.value)}
+                                onInput={e => setStock(e.target.value)}
+
+                            />
+                        </div>
+                        <div className={MYS.inputlogin}>
+                            <TextField
+                                required
+                                label="Unit in Number"
+                                fullWidth
+                                value={Unit}
+
+                                onInput={e => setUnit(e.target.value)}
+
+                            />
+                        </div>
+                        <div className={MYS.inputlogin}>
+                            <TextField
+                                required
+                                label="Unit in Text"
+                                fullWidth
+                                value={Unittext}
+
+                                onInput={e => setUnittext(e.target.value)}
 
                             />
                         </div>
@@ -280,35 +345,6 @@ export default function ScrollDialog() {
 
                             />
                         </div>
-                        <div className={MYS.inputlogin}>
-                            <TextField
-                                required
-                                label="Tagline"
-                                fullWidth
-                                value={Taglinetwo}
-
-                                onInput={e => setTaglinetwo(e.target.value)}
-
-                            />
-                        </div>
-                        <div className={MYS.inputlogin}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Is this product is Free ?</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={IsFree}
-                                    label="Is this product is Free ?"
-                                    onChange={handleChangeFree}
-                                >
-                                    <MenuItem value={false}>No</MenuItem>
-                                    <MenuItem value={true}>Yes</MenuItem>
-                                   
-                                </Select>
-                            </FormControl>
-                        </div>
-                        
-
                         <input type="hidden" id="FinalFileName" />
 
                         <div style={{ minHeight: 25 }}></div>

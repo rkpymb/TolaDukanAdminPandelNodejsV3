@@ -3,20 +3,28 @@ import Head from 'next/head';
 import CheckloginContext from '../../../context/auth/CheckloginContext'
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import MYS from '../../../Styles/mystyle.module.css'
+import { useRouter, useParams } from 'next/router'
 import { Container, Grid } from '@mui/material';
 import Footer from 'src/components/Footer';
-
-import TSlist from '../../components/List/TSlist';
 import Badge from '@mui/material/Badge';
-import AddTs from '../../components/Add/AddTs'
-import { useRouter, useParams } from 'next/router'
-import {
- 
-  IconButton,
- 
-  styled
-} from '@mui/material';
 import { LuArrowLeft } from "react-icons/lu";
+import Catlist from '../../components/List/Catlist';
+
+import AddCat from '../../components/Add/AddCat'
+import AddSubCat from '../../components/Add/AddSubCat'
+import {
+  Button,
+  Card,
+  IconButton,
+  Box,
+  styled,
+  Typography,
+  Avatar,
+  alpha,
+  Tooltip,
+  CardActionArea,
+
+} from '@mui/material';
 function DashboardCrypto() {
   const router = useRouter()
   const Contextdata = useContext(CheckloginContext)
@@ -29,6 +37,7 @@ function DashboardCrypto() {
       console.log('Not Login')
     }
   });
+
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       right: -3,
@@ -40,11 +49,11 @@ function DashboardCrypto() {
   return (
     <>
       <Head>
-        <title>Test Series</title>
+        <title>Categories</title>
       </Head>
       
       <Container className={MYS.min100vh}>
-
+      
         <div className={MYS.TitleWithBackHeader}>
           <div className={MYS.TitleWithBackHeaderA}>
             <IconButton aria-label="cart" onClick={() => router.back()}>
@@ -53,14 +62,18 @@ function DashboardCrypto() {
               </StyledBadge>
             </IconButton>
             <div>
-              <span>Test Series</span>
+            <span>Main Categories</span>
             </div>
           </div>
-          <div>
-            <AddTs />
+          <div style={{display:'flex',alignItems: 'center'}}>
+            <AddCat />
+            <div style={{minWidth:'10px'}}>
+
+            </div>
+            <AddSubCat />
           </div>
         </div>
-        <TSlist />
+        <Catlist />
       </Container>
       <Footer />
     </>

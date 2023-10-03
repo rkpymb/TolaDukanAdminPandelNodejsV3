@@ -2,7 +2,7 @@ import axios from 'axios';
 export default function handler(req, res) {
     if (req.method === 'POST') {
 
-        axios.post(`${process.env.API_URL}home/getCategories`, { token: process.env.MYKEY }).then((response) => {
+        axios.post(`${process.env.API_URL}home/OrderStatusList`, { token: process.env.MYKEY, OrderID: req.body.OrderID }).then((response) => {
             const senddta = response.data;
             res.status(200).json({ ReqD: senddta })
 

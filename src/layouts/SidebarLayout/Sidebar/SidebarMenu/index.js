@@ -13,25 +13,11 @@ import {
 import NextLink from 'next/link';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
+import { FiHome, FiShoppingCart, FiUsers, FiLayers, FiSettings } from "react-icons/fi";
 import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
-import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
+
 import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
-import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
-import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
-import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
-import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
-import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
-import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwoTone';
-import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
-import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
-import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -203,24 +189,39 @@ function SidebarMenu() {
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<BrightnessLowTwoToneIcon />}
+                    startIcon={<FiHome />}
                   >
                     Dashboard
                   </Button>
                 </NextLink>
               </ListItem>
               <ListItem component="div">
-                <NextLink href="/Academics/main" passHref>
+                <NextLink href="/Orders/main" passHref>
                   <Button
                     className={
-                      currentRoute === '/Academics/main' ? 'active' : ''
+                      currentRoute === '/Orders/main' ? 'active' : ''
                     }
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<EmojiEventsTwoToneIcon />}
+                    startIcon={<FiLayers />}
                   >
-                    Academics
+                    Orders
+                  </Button>
+                </NextLink>
+              </ListItem>
+              <ListItem component="div">
+                <NextLink href="/ecommerce/main" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/ecommerce/main' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<FiShoppingCart />}
+                  >
+                    E-Commerce
                   </Button>
                 </NextLink>
               </ListItem>
@@ -233,58 +234,31 @@ function SidebarMenu() {
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<EmojiEventsTwoToneIcon />}
+                    startIcon={<FiUsers />}
                   >
                     Users
                   </Button>
                 </NextLink>
               </ListItem>
               <ListItem component="div">
-                <NextLink href="/Educators/main" passHref>
+                <NextLink href="/Settings/main" passHref>
                   <Button
                     className={
-                      currentRoute === '/Educators/main' ? 'active' : ''
+                      currentRoute === '/Settings/main' ? 'active' : ''
                     }
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<EmojiEventsTwoToneIcon />}
+                    startIcon={<FiSettings />}
                   >
-                    Educators
-                  </Button>
-                </NextLink>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-            Reports
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <NextLink href="/SalesReports/main" passHref>
-                  <Button
-                    className={
-                      currentRoute === '/SalesReports/main' ? 'active' : ''
-                    }
-                    disableRipple
-                    component="a"
-                    onClick={closeSidebar}
-                    startIcon={<BrightnessLowTwoToneIcon />}
-                  >
-                    Sales Reports
+                    Settings
                   </Button>
                 </NextLink>
               </ListItem>
              
             </List>
           </SubMenuWrapper>
+         
         </List>
         
        

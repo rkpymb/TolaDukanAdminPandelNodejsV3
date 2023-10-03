@@ -42,7 +42,7 @@ function DashboardCrypto() {
   return (
     <>
       <Head>
-        <title>Supermarks Dashboard</title>
+        <title>TolaDukan Dashboard</title>
       </Head>
 
       <Container className={MYS.min100vh}>
@@ -56,7 +56,7 @@ function DashboardCrypto() {
                   </StyledBadge>
                 </IconButton>
                 <div>
-                  <span>Academics</span>
+                  <span>E-Commerce</span>
                 </div>
               </div>
               <div>
@@ -69,7 +69,7 @@ function DashboardCrypto() {
                   <span>Categories</span>
                   <small>manage all categories</small>
                   <div style={{ minHeight: '10px' }}></div>
-                  <Link href='/Academics/Categories'>
+                  <Link href='/ecommerce/Categories'>
                     <Button size='small' variant="outlined" endIcon={<SendIcon />}>
                       view more
                     </Button>
@@ -82,10 +82,10 @@ function DashboardCrypto() {
               </div>
               <div className={MYS.DashboardCounterItem}>
                 <div className={MYS.DashboardCounterItemA}>
-                  <span>Test Series</span>
-                  <small>manage all Test Series</small>
+                  <span>Products</span>
+                  <small>manage all Products</small>
                   <div style={{ minHeight: '10px' }}></div>
-                  <Link href='/Academics/TestSeries'>
+                  <Link href='/ecommerce/Products'>
                     <Button size='small' variant="outlined" endIcon={<SendIcon />}>
                       view more
                     </Button>
@@ -93,7 +93,7 @@ function DashboardCrypto() {
 
                 </div>
                 <div className={MYS.DashboardCounterItemB}>
-                  <Image src='/exam.png' alt='im' height='50' width='50' />
+                  <Image src='/online-shopping.png' alt='im' height='50' width='50' />
                 </div>
               </div>
 

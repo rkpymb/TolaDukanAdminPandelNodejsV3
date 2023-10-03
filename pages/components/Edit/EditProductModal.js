@@ -47,6 +47,10 @@ export default function ScrollDialog(props) {
   const [ImageMain, setImageMain] = useState(props.img);
   const [Productid, setProductid] = useState(props.id);
   const [Btnloading, setBtnloading] = useState(false);
+  const [UnitText, setUnittext] = useState(props.UnitText);
+  const [UnitNumber, setUnitNumber] = useState(props.UnitNumber);
+  const [SubCatListdata, setSubCatListdata] = useState([]);
+  const [SubCategory, setSubCategory] = useState(props.subcatid);
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -55,7 +59,28 @@ export default function ScrollDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleChangeSubCategory = (event) => {
+    setSubCategory(event.target.value);
+  };
 
+
+  const Subcatlist = async () => {
+    const dataid = '08c5th4rh86ht57h6g';
+    const sendUM = { dataid }
+    const data = await fetch("/api/V3/List/SubCategoriesList", {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(sendUM)
+    }).then((a) => {
+      return a.json();
+    })
+      .then((parsed) => {
+        setSubCatListdata(parsed.ReqD.categories)
+
+      })
+  }
   const descriptionElementRef = useRef(null);
   useEffect(() => {
     if (open) {
@@ -69,7 +94,7 @@ export default function ScrollDialog(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     let FinalFileName = document.querySelector('#FinalFileName').value
-    if (Title !== '' && FinalFileName !== '' && Category !== '' && Sprice !== '' && Mprice !== '' && Duration !== '' && Tagline !== '' && Taglinetwo !== '' && IsFree !== '') {
+    if (Title !== '' && FinalFileName !== '' && Category !== '' && SubCategory !== '' && Sprice !== '' && Mprice !== '' && Tagline !== '' && UnitNumber !== 0 && UnitText !== '') {
       setBtnloading(true)
       UpdateTS(FinalFileName)
     } else {
@@ -78,16 +103,14 @@ export default function ScrollDialog(props) {
 
 
   };
-  const handleChangeFree = (event) => {
-    setIsFree(event.target.value);
-  };
+  
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
   };
 
   const UpdateTS = async (e) => {
-    const sendUM = { catid: Category, title: Title, details: Details, img: e, mprice: Mprice, sprice: Sprice, isActive: IsActive,stock: Stock, duration: Duration, tagline: Tagline, taglinetwo: Taglinetwo, isFree: IsFree, Productid: Productid, JwtToken: Contextdata.JwtToken }
-    const data = await fetch("/api/V3/Update/UpdateTS", {
+    const sendUM = { catid: Category, subcatid: SubCategory, title: Title, details: Details, img: e, mprice: Mprice, sprice: Sprice, isActive: IsActive, stock: Stock, tagline: Tagline, UnitNumber: UnitNumber, UnitText: UnitText, JwtToken: Contextdata.JwtToken, id: Productid }
+    const data = await fetch("/api/V3/Update/UpdateProduct", {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -101,7 +124,7 @@ export default function ScrollDialog(props) {
         setBtnloading(false)
         if (parsed.senddta) {
           setOpen(false)
-          router.push('/Academics/TestSeries')
+          router.push('/ecommerce/Products')
         } else {
           alert('Something Went Wrong')
         }
@@ -123,6 +146,7 @@ export default function ScrollDialog(props) {
         return a.json();
       })
         .then((parsed) => {
+          Subcatlist()
           console.log(parsed.ReqD.categories)
           setCatListdata(parsed.ReqD.categories)
 
@@ -216,7 +240,30 @@ export default function ScrollDialog(props) {
                 </Select>
               </FormControl>
             </div>
+            <div className={MYS.inputlogin}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Sub Category</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={SubCategory}
+                  label="Select Category"
+                  onChange={handleChangeSubCategory}
+                >
+                  <MenuItem value={Category}>{SubCategory}</MenuItem>
+                  {SubCatListdata.map((item) => {
+                    return <MenuItem value={item.slug}>{item.name}</MenuItem>
 
+
+                  }
+
+                  )}
+
+
+
+                </Select>
+              </FormControl>
+            </div>
             <div className={MYS.inputlogin}>
               <TextField
                 required
@@ -244,53 +291,38 @@ export default function ScrollDialog(props) {
             <div className={MYS.inputlogin}>
               <TextField
                 required
-                label="Validity in days"
+                label="Stock"
                 fullWidth
                 type='number'
-                value={Duration}
+                value={Stock}
 
-                onInput={e => setDuration(e.target.value)}
-
-              />
-            </div>
-            <div className={MYS.inputlogin}>
-              <TextField
-                required
-                label="Tagline"
-                fullWidth
-                value={Tagline}
-
-                onInput={e => setTagline(e.target.value)}
+                onInput={e => setStock(e.target.value)}
 
               />
             </div>
             <div className={MYS.inputlogin}>
               <TextField
                 required
-                label="Tagline"
+                label="Unit in Number"
                 fullWidth
-                value={Taglinetwo}
-
-                onInput={e => setTaglinetwo(e.target.value)}
+                value={UnitNumber}
+                type='Number'
+                onInput={e => setUnitNumber(e.target.value)}
 
               />
             </div>
             <div className={MYS.inputlogin}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Is this product is Free ?</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={IsFree}
-                  label="Is this product is Free ?"
-                  onChange={handleChangeFree}
-                >
-                  <MenuItem value={false}>No</MenuItem>
-                  <MenuItem value={true}>Yes</MenuItem>
+              <TextField
+                required
+                label="Unit in Text"
+                fullWidth
+                value={UnitText}
 
-                </Select>
-              </FormControl>
+                onInput={e => setUnittext(e.target.value)}
+
+              />
             </div>
+           
 
 
             <input type="hidden" id="FinalFileName" value={ImageMain} />
@@ -301,7 +333,7 @@ export default function ScrollDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          
+
           <LoadingButton
             size="small"
             onClick={handleSubmit}

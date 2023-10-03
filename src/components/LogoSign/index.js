@@ -4,7 +4,7 @@ const index = () => {
   return (
     <div className={Mys.LogoBox}>
       <div className={Mys.Logomain}>
-        <img src='https://supermarks.in/logo/logomain.png' alt='logo' />
+        <img src='/mainlogo.svg' alt='logo' />
        
       </div>
       <div className={Mys.LogoBoxB}> <small>Main Dashboard Panel</small></div>

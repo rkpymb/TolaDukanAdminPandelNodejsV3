@@ -1,8 +1,12 @@
 import axios from 'axios';
 export default function handler(req, res) {
     if (req.method === 'POST') {
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${req.body.JwtToken}`,
+        };
 
-        axios.post(`${process.env.API_URL}home/getCategories`, { token: process.env.MYKEY }).then((response) => {
+        axios.post(`${process.env.API_URL}admin/AllOrderList`, { token: process.env.MYKEY }, { headers }).then((response) => {
             const senddta = response.data;
             res.status(200).json({ ReqD: senddta })
 

@@ -3,27 +3,20 @@ import Head from 'next/head';
 import CheckloginContext from '../../../context/auth/CheckloginContext'
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import MYS from '../../../Styles/mystyle.module.css'
-import { useRouter, useParams } from 'next/router'
 import { Container, Grid } from '@mui/material';
 import Footer from 'src/components/Footer';
+
+import ProductList from '../../components/List/ProductList';
 import Badge from '@mui/material/Badge';
-import { LuArrowLeft } from "react-icons/lu";
-import Catlist from '../../components/List/Catlist';
-
-import AddCat from '../../components/Add/AddCat'
+import AddProduct from '../../components/Add/AddProduct'
+import { useRouter, useParams } from 'next/router'
 import {
-  Button,
-  Card,
+ 
   IconButton,
-  Box,
-  styled,
-  Typography,
-  Avatar,
-  alpha,
-  Tooltip,
-  CardActionArea,
-
+ 
+  styled
 } from '@mui/material';
+import { LuArrowLeft } from "react-icons/lu";
 function DashboardCrypto() {
   const router = useRouter()
   const Contextdata = useContext(CheckloginContext)
@@ -36,7 +29,6 @@ function DashboardCrypto() {
       console.log('Not Login')
     }
   });
-
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       right: -3,
@@ -48,11 +40,11 @@ function DashboardCrypto() {
   return (
     <>
       <Head>
-        <title>Categories</title>
+        <title>Product</title>
       </Head>
       
       <Container className={MYS.min100vh}>
-      
+
         <div className={MYS.TitleWithBackHeader}>
           <div className={MYS.TitleWithBackHeaderA}>
             <IconButton aria-label="cart" onClick={() => router.back()}>
@@ -61,14 +53,14 @@ function DashboardCrypto() {
               </StyledBadge>
             </IconButton>
             <div>
-            <span>Main Categories</span>
+              <span>Product</span>
             </div>
           </div>
           <div>
-            <AddCat />
+            <AddProduct />
           </div>
         </div>
-        <Catlist />
+        <ProductList />
       </Container>
       <Footer />
     </>

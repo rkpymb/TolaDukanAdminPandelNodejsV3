@@ -66,7 +66,7 @@ const EditCatModal = (props) => {
   const UpdateCat = async (e) => {
 
     const sendUM = { imageUrl: e, name: Title, catid: CatID, JwtToken: Contextdata.JwtToken, CatOrder :CatOrder}
-    const data = await fetch("/api/V3/Update/EditCat", {
+    const data = await fetch("/api/V3/Update/EditSubCat", {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -95,7 +95,7 @@ const EditCatModal = (props) => {
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
         >
-          <DialogTitle id="scroll-dialog-title">Edit : {Title}</DialogTitle>
+          <DialogTitle id="scroll-dialog-title">Edit Sub Category : {Title}</DialogTitle>
           <DialogContent dividers={scroll === 'paper'}>
             <form onSubmit={handleSubmit} >
               <div className={MYS.inputlogin}>

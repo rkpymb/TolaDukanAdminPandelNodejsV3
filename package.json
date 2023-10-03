@@ -35,7 +35,8 @@
     "react-apexcharts": "1.4.0",
     "react-custom-scrollbars-2": "4.4.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "react-lottie": "^1.2.3"
   },
   "scripts": {
     "dev": "next",

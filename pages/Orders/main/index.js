@@ -8,7 +8,7 @@ import Footer from 'src/components/Footer';
 import Button from '@mui/material/Button';
 import Link from 'next/link'
 import SendIcon from '@mui/icons-material/Send';
-import UsersList from '../../components/List/UsersList'
+import AllOrderslist from '../../components/List/AllOrderslist'
 import Badge from '@mui/material/Badge';
 import { LuArrowLeft } from "react-icons/lu";
 import {
@@ -40,14 +40,14 @@ function DashboardCrypto() {
     return (
         <>
             <Head>
-                <title>TolaDukan Dashboard</title>
+                <title>All Orders</title>
             </Head>
 
             <Container className={MYS.min100vh}>
                 {!Loading &&
                     <div>
-                       
-                        <UsersList/>
+
+                        <AllOrderslist/>
 
                     </div>
                 }

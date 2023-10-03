@@ -3,17 +3,20 @@ import { Card } from '@mui/material';
 
 import { useRouter } from 'next/router'
 import Link from 'next/link';
-
+import Badge from '@mui/material/Badge';
+import MYS from '../../../Styles/mystyle.module.css'
 import Avatar from '@mui/material/Avatar';
 import CheckloginContext from '../../../context/auth/CheckloginContext'
 
-
+import { LuArrowLeft } from "react-icons/lu";
 import {
     Tooltip,
     Divider,
     Box,
     FormControl,
     InputLabel,
+    IconButton,
+    styled,
 
     Button,
     Table,
@@ -58,9 +61,36 @@ function RecentOrders() {
 
     }, [router.query])
 
+    const StyledBadge = styled(Badge)(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            right: -3,
+            top: 13,
+            border: `2px solid ${theme.palette.background.paper}`,
+            padding: '0 4px',
+        },
+    }));
+
     const theme = useTheme();
 
     return (<>
+        {!isLoading &&
+
+            <div className={MYS.TitleWithBackHeader}>
+                <div className={MYS.TitleWithBackHeaderA}>
+                    <IconButton aria-label="cart" onClick={() => router.back()}>
+                        <StyledBadge color="secondary" >
+                            <LuArrowLeft />
+                        </StyledBadge>
+                    </IconButton>
+                    <div>
+                        <span>TolaDukan all Users ({Retdata.length})</span>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        }
             <Card>
                 <TableContainer>
                     <Table>

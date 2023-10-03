@@ -10,6 +10,13 @@ import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import MYS from '../../../Styles/mystyle.module.css'
 import UploadDoimg from '../UploadDo/UploadDoimg'
 import { Toast } from 'primereact/toast';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+
 import { useRouter, useParams } from 'next/router'
 
 import {
@@ -22,6 +29,8 @@ import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
 export default function ScrollDialog() {
     const [Btnloading, setBtnloading] = useState(false);
+    const [isLoading, setisLoading] = useState(true);
+    const [Catlist, setCatlist] = useState([]);
     const Contextdata = useContext(CheckloginContext)
     const router = useRouter()
   
@@ -29,6 +38,13 @@ export default function ScrollDialog() {
     const [Mainimg, setMainimg] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png');
     const [scroll, setScroll] = useState('paper');
     const [Title, SetTitle] = useState('');
+
+    const [MainCat, setMainCat] = React.useState('');
+
+    const handleChangeMainCat = (event) => {
+        setMainCat(event.target.value);
+    };
+
     const handleClickOpen = (scrollType) => () => {
         setOpen(true);
         setScroll(scrollType);
@@ -40,6 +56,7 @@ export default function ScrollDialog() {
 
     const descriptionElementRef = useRef(null);
     useEffect(() => {
+        GetCatlist()
         if (open) {
             const { current: descriptionElement } = descriptionElementRef;
             if (descriptionElement !== null) {
@@ -65,8 +82,8 @@ export default function ScrollDialog() {
     const AddCat = async (e) => {
         
         const slug = Title.replace(/\s/g, '-'); 
-        const sendUM = { imageUrl: e, name: Title, slug: slug, JwtToken: Contextdata.JwtToken }
-        const data = await fetch("/api/V3/Add/Addcat", {
+        const sendUM = { imageUrl: e, name: Title, slug: slug, MainCat: MainCat, JwtToken: Contextdata.JwtToken }
+        const data = await fetch("/api/V3/Add/AddSubcat", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
@@ -88,6 +105,31 @@ export default function ScrollDialog() {
 
             })
     }
+    const GetCatlist = async () => {
+    
+        const sendUM = 1
+        const data = await fetch("/api/V3/List/CatList", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(sendUM)
+        }).then((a) => {
+            return a.json();
+        })
+            .then((parsed) => {
+               
+                if (parsed.ReqD.categories) {
+                    setCatlist(parsed.ReqD.categories)
+                    setisLoading(false)
+                    
+                } else {
+                    alert('Something went wrong')
+                }
+               
+
+            })
+    }
 
 
     return (
@@ -98,7 +140,7 @@ export default function ScrollDialog() {
                 variant="outlined"
                 startIcon={<AddTwoToneIcon fontSize="small" />}
             >
-                Add new category
+                Add new Sub Category
             </Button>
             <Dialog
                 open={open}
@@ -107,7 +149,7 @@ export default function ScrollDialog() {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Add new Category</DialogTitle>
+                <DialogTitle id="scroll-dialog-title">Add new Sub Category</DialogTitle>
                 <DialogContent dividers={scroll === 'paper'}>
 
                     <div className={MYS.featuresimagebox}>
@@ -130,6 +172,29 @@ export default function ScrollDialog() {
                         </div>
                     </div>
                     <form onSubmit={handleSubmit} >
+                        {!isLoading &&
+                            <div className={MYS.inputlogin}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Main Category</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={MainCat}
+                                        label="Main Category"
+                                        onChange={handleChangeMainCat}
+                                    >
+                                        {Catlist.map((item,index) => {
+                                            return <MenuItem value={item.slug} key={item._id}>{index + 1} : {item.name}</MenuItem>
+                                        }
+
+                                        )}
+                                      
+                                        
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        }
+
                         <div className={MYS.inputlogin}>
                             <TextField
                                 required

@@ -20,14 +20,14 @@ import {
   useTheme,
 } from '@mui/material';
 import CheckloginContext from '../../../context/auth/CheckloginContext'
-const EditCatModal = (props) => {
+const EditCatModal = ({TitleMain, OrderIDMain}) => {
   const [Btnloading, setBtnloading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
-  const [CatID, setCatID] = useState(props.CatID);
-  const [CatOrder, setCatOrder] = useState(props.CatOrder);
-  const [Title, setTitle] = useState(props.Title);
-  const [CatImg, setCatImg] = useState(props.CatImg);
+  const [OrderID, setOrderID] = useState(OrderIDMain);
+ 
+  const [Title, setTitle] = useState(TitleMain);
+  
   const Contextdata = useContext(CheckloginContext)
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -50,11 +50,10 @@ const EditCatModal = (props) => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    let FinalFileName = document.querySelector('#FinalFileName').value
-    let FinalCatImg = ''
-    if (Title !== '' && FinalFileName !== '') {
+   
+    if (Title !== '') {
       setBtnloading(true)
-      UpdateCat(FinalFileName)
+      UpdateNote()
 
     } else {
       alert('all fields are required');
@@ -63,10 +62,10 @@ const EditCatModal = (props) => {
 
   };
 
-  const UpdateCat = async (e) => {
+  const UpdateNote = async () => {
 
-    const sendUM = { imageUrl: e, name: Title, catid: CatID, JwtToken: Contextdata.JwtToken, CatOrder :CatOrder}
-    const data = await fetch("/api/V3/Update/EditCat", {
+    const sendUM = { Title: Title, OrderID: OrderID, JwtToken: Contextdata.JwtToken }
+    const data = await fetch("/api/V3/Update/UpdateNote", {
       method: "POST",
       headers: {
         'Content-type': 'application/json'
@@ -79,14 +78,17 @@ const EditCatModal = (props) => {
         setBtnloading(false)
         console.log(parsed);
         setOpen(false)
-        router.push('/ecommerce/Categories')
+        alert('Delivery note updated successfully')
+        router.push(`/Orders/ManageOrder/${OrderID}`)
 
       })
   }
+
+ 
   return (
     <div>
       <div>
-        <Button onClick={handleClickOpen('paper')}>Edit</Button>
+        <Button onClick={handleClickOpen('paper')} size="small">Edit</Button>
 
         <Dialog
           open={open}
@@ -95,54 +97,19 @@ const EditCatModal = (props) => {
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
         >
-          <DialogTitle id="scroll-dialog-title">Edit : {Title}</DialogTitle>
+         
           <DialogContent dividers={scroll === 'paper'}>
             <form onSubmit={handleSubmit} >
               <div className={MYS.inputlogin}>
                 <TextField
                   required
-                  label="Category Title"
+                  label="Enter Delivery note"
                   fullWidth
                   value={Title}
                   onInput={e => setTitle(e.target.value)}
 
                 />
               </div>
-              <div className={MYS.inputlogin}>
-                <TextField
-                  required
-                  label="Category Order"
-                  fullWidth
-                  type='Number'
-                  value={CatOrder}
-                  onInput={e => setCatOrder(e.target.value)}
-
-                />
-              </div>
-
-              <div className={MYS.featuresimagebox}>
-                <div className={MYS.featuresimageboxA}>
-                  <img
-                    src={`${DO_SPACES_URL}${DO_SPACES_FOLDER}/${CatImg}`}
-                    width={100}
-                    height={100}
-                    layout='responsive'
-                    alt='img'
-                    id="Fimage"
-
-                  />
-                  <div>
-                    <small>features images</small>
-                  </div>
-                </div>
-                <div className={MYS.featuresimageboxB}>
-                  <UploadDoimg />
-                </div>
-              </div>
-              <input type="hidden" value={CatImg} id="FinalFileName" />
-
-              <div style={{ minHeight: 25 }}></div>
-
             </form>
           </DialogContent>
           <DialogActions>

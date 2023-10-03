@@ -169,6 +169,7 @@ margin: 0;
 }
 .DashboardCounterItemA span{
     font-weight: 600;
+    font-size: 20px;
 }
 .UserProfileBoxTop{
     padding:20px;
@@ -182,3 +183,632 @@ margin: 0;
     font-weight: 600;
     font-size:25px;
 }
+.OrderItemList{
+   
+    margin: 10px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 22%);
+        border-radius: 10px;
+        background-color: rgb(255, 255, 255);
+}
+.OrderItemListGrid {
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+}
+.OrderItemListA{
+    padding: 20px;
+    height:270px;
+    overflow: hidden;
+}
+.TrackBtnOrd{
+    padding: 10px;
+    margin-top: 10px;
+    border-top: 1px dashed rgb(231, 222, 222);
+    background-color: white;
+}
+.UserCounterGid {
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+}
+.Counterimage{
+    width:50px;
+    height: 50px;
+}
+.UserCounterItem{
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 22%);
+    margin: 10px;
+}
+.UserCounterItemA{
+    display: flex;
+    flex-direction: column;
+}
+
+.UserCounterItemA span{
+    font-size:20px;
+    font-weight: 600;
+}
+.UserCounterItemA small{
+    font-size:13px;
+    font-weight: 500;
+}
+
+
+.OrderStatusBoxA {
+    width: 60%;
+    padding: 5px;
+}
+
+.OrderStatusBoxB {
+    width: 30%;
+}
+
+.OrderStatusBoxABox {
+    height: auto;
+
+
+}
+
+.OrderStatusTextItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: none;
+
+}
+/* Cart */
+.OnlyDesktopCheckoutBtn {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.totalFinalDiscount {
+    font-weight: 600;
+
+    color: #17b31b;
+}
+
+.totalFinalDiscountBox {
+
+    background-image: url('/6ob.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px;
+
+}
+
+.checkputamt {
+    margin-left: 8px;
+    color: rgb(195, 255, 0);
+}
+
+.CheckoutMobileBoxFooter {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+    background-color: #ffffff22;
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgb(243, 237, 237);
+    z-index: 999;
+    padding: 10px;
+}
+
+.MobileCatH {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.MobileCatHA {
+    font-weight: 500;
+}
+
+.MainTitleBoxCart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.DshadedBorderDevider {
+    min-height: 10x;
+    border: 1px dashed rgb(215, 204, 204);
+
+}
+
+.MainTitleBoxCartA {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    justify-content: space-between;
+}
+.Deviderx{
+    margin-top:20px;
+
+    height: 1px;
+    background-color:rgb(215, 204, 204);
+    
+
+}
+.PaymentItemType {
+    font-size: 12px;
+    font-weight: 500;
+   
+    background-color:rgb(34, 119, 255);
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.PaymentItemTypeRefunded {
+    font-size: 12px;
+    font-weight: 500;
+   
+    background-color:red;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+.PaymentItem{
+    border-radius: 10px;
+    border: 1px dashed rgb(215, 204, 204);
+    padding: 20px;
+    margin:10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.PaymentItemA span{
+font-size: 20px;
+font-weight: 500;
+}
+.ExpTextBox{
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px dashed rgb(199, 184, 184);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    
+}
+.Ativitytitle {
+    display: flex;
+    align-items: center;
+   
+}
+
+.TakingzTmbic{
+    height: 400px;
+    overflow:scroll;
+    overflow-x: hidden;
+}
+.MainTitleBoxCartAtext {
+    margin-left: 10px;
+}
+
+.BagFlexBox {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    overflow-y: auto;
+
+
+}
+
+.TotalBox {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.BagFlexBoxA {
+    width: 60%;
+    padding: 20px;
+
+
+
+}
+
+.CartitemBox {
+
+    height: 590px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.BagFlexBoxBContainer {
+    min-height: 300px;
+}
+
+.BagFlexBoxB {
+    margin-top: 100px;
+    width: 40%;
+
+    padding: 10px;
+
+
+}
+
+.discountimg {
+    width: 25px;
+    height: 25px;
+    animation: rotate 4s linear infinite;
+    /* Adjust the duration and timing function as needed */
+    transform-origin: center;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.BagFlexBoxBCupon {
+    background-color: #ffffff;
+    padding: 20px;
+    height: 100px;
+    border: 1px solid rgb(223, 207, 207);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.BagFlexBoxBCuponA {
+    display: flex;
+
+
+}
+
+.discountText {
+    margin-left: 10px;
+}
+
+.discountText span {
+    font-weight: 600;
+}
+
+.discountText small {
+    color: rgb(50, 138, 129);
+}
+
+.AddressNotSelect {
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(218, 204, 218);
+
+    min-height: 100px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.AddressSelect {
+    margin: 10px;
+    border-radius: 10px;
+    min-height: 100px;
+    border: 1px solid #00a6ff;
+    background-color: #00a6ff;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+.AddressHeder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.AddressHederA {
+    width: 70%;
+}
+
+.AddressHederADatabox {
+    display: flex;
+}
+
+.AddressHederADataboxB {
+    margin-left: 10px;
+    width: 90%;
+}
+
+.AddressHederADataboxBName {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.AddressHederADataboxBData span {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.CartListItem {
+    cursor: pointer;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 1px solid rgb(218, 204, 218);
+    padding: 10px;
+
+}
+
+
+.CartListItemBox {
+    padding: 10px;
+}
+
+.CartListItemA {
+    width: 80%;
+    display: flex;
+    overflow: hidden;
+}
+
+.CartListItemB {
+    width: 20%;
+    overflow: hidden;
+}
+
+.CartListItemAImg {
+    border: 1px solid rgb(234, 227, 227);
+    border-radius: 5px;
+    width: 100px;
+    padding: 10px;
+}
+
+.CartListItemContent {
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.CartListItemContentTitle {
+    font-weight: 600;
+}
+
+.CartListItemContentPrice span {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.Crtpagetags span {
+    font-weight: 600;
+    font-size: 13px;
+    color: #17b31b;
+}
+
+.OtherDataBoxCart {
+    font-size: 12px;
+}
+
+.PaymentBoxItem {
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: 80px;
+    border: 1px solid rgb(223, 207, 207);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+.PaymentBoxItemBImg {
+    width: 50px;
+}
+
+.PaymentBoxItemA {
+    display: flex;
+    width: 80%;
+}
+
+.PaymentBoxItemB {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.FinalAddressText {
+
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    border: 1px dashed rgb(223, 207, 207);
+    color: black;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+
+}
+
+.DeliveryTime {
+    font-weight: bold;
+    color: rgb(161, 155, 90);
+}
+
+.PaymentBoxItemB span {
+    font-weight: 600;
+}
+
+.CartSummybox {
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: 200px;
+    border: 1px solid rgb(223, 207, 207);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+
+}
+
+.ClearCartBox {
+    padding: 20px;
+
+}
+
+.CartSummyboxA {
+    width: 100%;
+}
+
+.amttext {
+    font-weight: 600;
+}
+
+.amttextSub {
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.CartSummyboxListBoxItem {
+    margin-top: 10px;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.InputBoxData {
+    margin-top: 15px;
+
+}
+
+.InputBoxData label {
+    font-weight: 600;
+
+}
+
+.InputBoxData input {
+    width: 100%;
+    padding: 10px;
+
+}
+
+.InputBoxData select {
+    width: 100%;
+    padding: 10px;
+
+}
+
+.InputGroupBoxData {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ClearCartBox {
+    padding: 20px;
+
+}
+
+.OrderStatusTextItem {
+    width: fit-content;
+    font-size: 14px;
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 22%);
+
+    background-color: #00a6ff;
+    color: white;
+    display: flex;
+    align-items: center;
+
+}
+
+.OrderStatusTextItemIcon {
+    margin-top: 5px;
+}
+
+.OrderStatusTextItemText {
+    margin-left: 5px;
+}
+
+.OrderStatusBoxABoxItemBox {
+    padding: 10px;
+}
+.OrderDetailsBox {
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: 200px;
+    border: 1px solid rgb(223, 207, 207);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+
+
+
+}
+
+.OrderStatusBoxABox {
+   color: black;
+
+
+}
+
+.OrderStatusBoxB {
+    width: 40%;
+    padding: 30px;
+
+
+
+}
+.TrakingTimelineItemDate {
+    margin-left: 20px;
+    font-size: 10px;
+}
+
+.TrakingTimelineItem {
+    display: flex;
+    flex-direction: column;
+
+    margin: 5px;
+}
+
+.TrakingTimelineItemLine {
+    margin-left: 5px;
+    height: 50px;
+
+    width: 1px;
+    border: 1px dashed rgb(210, 196, 196);
+}
+ .OrderStatusBox {
+    display: flex;
+     margin: auto;
+     width: 100%;
+     flex-wrap: wrap-reverse;
+
+ }
+/* Cart */

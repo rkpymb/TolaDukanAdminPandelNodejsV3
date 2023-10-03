@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import Label from 'src/components/Label';
 import Image from 'next/image';
-import EditTSmodal from '../Edit/EditTSmodal'
+import EditProductModal from '../Edit/EditProductModal'
 import DeleteCatModal from '../Edit/DeleteCatModal'
 import MYS from '../../../Styles/mystyle.module.css'
 import { DO_SPACES_URL, DO_SPACES_FOLDER } from '../../../Data/config'
@@ -45,7 +45,7 @@ function RecentOrders() {
         const handleSubmit = async () => {
             const dataid = '08c5th4rh86ht57h6g';
             const sendUM = { dataid }
-            const data = await fetch("/api/V3/List/TSlist", {
+            const data = await fetch("/api/V3/List/Productlist", {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
@@ -56,7 +56,7 @@ function RecentOrders() {
             })
                 .then((parsed) => {
                     console.log(parsed.ReqD.TS)
-                    setRetdata(parsed.ReqD.TS)
+                    setRetdata(parsed.ReqD.Products)
                     setIsLoading(false)
                 })
         }
@@ -94,13 +94,11 @@ function RecentOrders() {
                                         <div>
                                             <span>Sale Price : ₹{item.sprice}</span>
                                         </div>
-                                        <div>
-                                            <span>Category : {item.catid}</span>
-                                        </div>
+                                       
                                         <div style={{minHeight:'20px'}}>
                                             </div>
                                         <div style={{ display: 'flex', alignItems: 'center'}}>
-                                            <EditTSmodal
+                                            <EditProductModal
                                                 title={item.title}
                                                 details={item.details}
                                                 stock={item.stock}
@@ -114,11 +112,12 @@ function RecentOrders() {
                                                 isFree={item.isFree}
                                                 id={item._id}
                                                 img={item.img}
+                                                UnitText={item.UnitText}
+                                                UnitNumber={item.UnitNumber}
+                                                subcatid={item.subcatid}
                                               
                                             
                                             />
-
-
 
                                             <div style={{ minWidth:'10px'}}></div>
                                             <Link href={`/TSChapters/${item._id}`}>
@@ -127,12 +126,8 @@ function RecentOrders() {
                                                 </Button>
                                             </Link>
 
-                                            <div style={{ minWidth: '10px' }}></div>
-                                            <Link href={`/TSChapters/${item._id}/${item.title}`}>
-                                                <Button size='small' variant="outlined" startIcon={<ViewStreamIcon />}>
-                                                    Chapters
-                                                </Button>
-                                            </Link>
+                                        
+                                           
 
                                         </div>
                                     </div>
